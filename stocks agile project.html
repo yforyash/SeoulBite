@@ -1,0 +1,293 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Stock Trading Platform</title>
+    <style>
+        /* General Styles */
+        body {
+            font-family: 'Arial', sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #d3d3df;
+            color: #1d1919;
+        }
+
+        header {
+            background-color: #e4230e;
+            color: #fff;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 25px;
+        }
+
+        header h1 {
+            margin: 1;
+            font-size: 28px;
+        }
+
+        .auth-buttons {
+            margin-right: 20px;
+        }
+
+        .auth-buttons button {
+            background-color: #9dde12;
+            color: rgb(17, 14, 14);
+            border: groove;
+            padding: 12px 15px;
+            margin: 0 5;
+            border-radius: 20px;
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+
+        .auth-buttons button:hover {
+            background-color: #75820e;
+        }
+
+        nav {
+            background-color: #4459a3;
+            display: flex;
+            justify-content: center;
+            padding: 15px 0;
+        }
+
+        nav a {
+            color: #1b1616;
+            text-decoration: tomato;
+            margin: 0 15px;
+            font-weight:bolder;
+            transition: color 0.3s;
+        }
+
+        nav a:hover {
+            color: #89bc1a;
+        }
+
+        .stock-table {
+            width: 90%;
+            margin: 20px auto;
+            border-collapse: collapse;
+            text-align: center;
+        }
+
+        .stock-table th, .stock-table td {
+            border: 1px solid #ddd;
+            padding: 8px;
+        }
+
+        .stock-table th {
+            background-color: #2c3e50;
+            color: white;
+        }
+
+        .stock-table tr:nth-child(even) {
+            background-color: #f2f2f2;
+        }
+
+        .stock-table tr:hover {
+            background-color: #ddd;
+        }
+
+        .arrow-up {
+            color: green;
+        }
+
+        .arrow-down {
+            color: red;
+        }
+
+        footer {
+            background-color: #2c3e50;
+            color: white;
+            text-align: center;
+            padding: 10px 0;
+            margin-top: 20px;
+        }
+
+        /* Pop-Up Form */
+        .form-container {
+            display: none;
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+            padding: 20px;
+            width: 300px;
+            z-index: 1000;
+        }
+
+        .form-container h3 {
+            margin: 0 0 15px 0;
+            font-size: 20px;
+            color: #2c3e50;
+        }
+
+        .form-container input, .form-container select, .form-container button {
+            width: 100%;
+            margin: 10px 0;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+        }
+
+        .form-container button {
+            background-color: #1abc9c;
+            color: white;
+            cursor: pointer;
+        }
+
+        .form-container button:hover {
+            background-color: #16a085;
+        }
+
+        .overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            z-index: 999;
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Stock Trading Platform</h1>
+        <div class="auth-buttons">
+            <button onclick="showForm('login')">Login</button>
+            <button onclick="showForm('signup')">Sign Up</button>
+        </div>
+    </header>
+
+    <nav>
+        <a href="#stocks">Stock Prices</a>
+    </nav>
+
+    <!-- Stock Prices Section -->
+    <section id="stocks" class="container">
+        <h2>Stock Prices</h2>
+        <table class="stock-table">
+            <thead>
+                <tr>
+                    <th>Stock Name</th>
+                    <th>Stock Code</th>
+                    <th>Price</th>
+                    <th>Change</th>
+                    <th>Date</th>
+                    <th>Buy</th>
+                </tr>
+            </thead>
+            <tbody id="stock-data">
+                <!-- Data populated dynamically -->
+            </tbody>
+        </table>
+    </section>
+
+    <footer>
+        <p>© 2024 Stock Trading Platform. All Rights Reserved.</p>
+    </footer>
+
+    <div class="overlay" id="overlay" onclick="hideForm()"></div>
+
+    <div class="form-container" id="login-form">
+        <h3>Login</h3>
+        <input type="email" placeholder="Email" required>
+        <input type="password" placeholder="Password" required>
+        <button onclick="alert('Logged In!')">Login</button>
+    </div>
+
+    <div class="form-container" id="signup-form">
+        <h3>Sign Up</h3>
+        <input type="text" placeholder="Name" required>
+        <input type="email" placeholder="Email" required>
+        <input type="text" placeholder="Phone Number" required>
+        <input type="password" placeholder="Create Password" required>
+        <button onclick="alert('Signed Up!')">Sign Up</button>
+    </div>
+
+    <div class="form-container" id="buy-form">
+        <h3>Buy Stocks</h3>
+        <input type="text" placeholder="Name" required>
+        <input type="text" placeholder="Aadhaar Number" required>
+        <select required>
+            <option value="" disabled selected>Payment Method</option>
+            <option value="upi">UPI</option>
+            <option value="card">Card</option>
+        </select>
+        <button onclick="alert('Stock Purchased!')">Buy</button>
+    </div>
+
+    <script>
+        // Stock data simulation
+        const stocks = [
+            { name: "TCS", code: "TCS" },
+            { name: "Infosys", code: "INFY" },
+            { name: "Reliance", code: "RELI" },
+            { name: "Wipro", code: "WIP" },
+            { name: "HDFC Bank", code: "HDFCB" }
+        ];
+
+        const stockData = [];
+        const generateStockData = () => {
+            const startDate = new Date(2024, 0, 1);
+            stocks.forEach(stock => {
+                let previousPrice = Math.random() * 1000 + 500;
+                for (let i = 0; i < 10; i++) {
+                    const date = new Date(startDate);
+                    date.setDate(date.getDate() + i);
+                    const priceChange = (Math.random() * 20 - 10).toFixed(2);
+                    const newPrice = Math.max(10, (previousPrice + parseFloat(priceChange)).toFixed(2));
+                    const change = newPrice - previousPrice;
+                    stockData.push({
+                        ...stock,
+                        price: newPrice,
+                        change,
+                        date: date.toISOString().split('T')[0]
+                    });
+                    previousPrice = newPrice;
+                }
+            });
+        };
+
+        generateStockData();
+
+        const stockTable = document.getElementById('stock-data');
+        stockData.forEach(({ name, code, price, change, date }) => {
+            const row = `
+                <tr>
+                    <td>${name}</td>
+                    <td>${code}</td>
+                    <td>${price}</td>
+                    <td>
+                        <span class="${change > 0 ? 'arrow-up' : 'arrow-down'}">
+                            ${change > 0 ? '↑' : '↓'} ${Math.abs(change).toFixed(2)}
+                        </span>
+                    </td>
+                    <td>${date}</td>
+                    <td><button onclick="showForm('buy')">Buy</button></td>
+                </tr>
+            `;
+            stockTable.innerHTML += row;
+        });
+
+        function showForm(formId) {
+            document.getElementById('overlay').style.display = 'block';
+            document.getElementById(`${formId}-form`).style.display = 'block';
+        }
+
+        function hideForm() {
+            document.getElementById('overlay').style.display = 'none';
+            document.querySelectorAll('.form-container').forEach(form => form.style.display = 'none');
+        }
+    </script>
+</body>
+</html>
