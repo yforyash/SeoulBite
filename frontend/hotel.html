@@ -1,296 +1,60 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Welcome to [Restaurant Name], where authentic Korean flavors meet modern ambiance.">
-    <title>Koreyaki Authentic Korean Cuisine</title>
-    <link rel="stylesheet" href="style.css">
-    <script src="script.js"></script>
-    <style>
-        body {
-            font-family:Georgia, 'Times New Roman', Times, serif, sans-serif;
-            margin: 9;
-            padding: 5;
-            line-height: 1.6;
-            color: #0e0c0c;
-        }
-        header {
-            background: url('download (3).jpg') no-repeat center center/cover;
-            color: #181515;
-            padding: 50px 40px;
-            text-align: center;
-        }
-        
-        nav {
-            display: flex;
-            justify-content: center;
-            background: #c71414;
-            padding: px 0;
-        }
-        nav a {
-            color: rgb(33, 33, 37);
-            margin:  15px;
-            text-decoration:rgb(199, 75, 34);
-            font-size: 18px;
-        }
-        nav a:hover {
-            text-decoration:rgb(211, 5, 5);
-        }
-        .container {
-            padding: 20px;
-        }
-        .menu {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(256px, 5fr));
-            gap: 20px;
-        }
-        .menu-item {
-            border: 2px solid #a80e0e;
-            border-radius: 7cqh;
-            padding: 16px;
-            text-align: center;
-        }
-        .menu-item img {
-            width: 110%;
-            border-radius: 2%;
-        }
-        .location, .contact {
-            text-align: center;
-            margin: 50px 0;
-        }
-        footer {
-            background: #aaacc4;
-            color: rgb(24, 19, 19);
-            text-align: center;
-            padding: 30px 0;
-        }
-        
-    </style>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>SeoulBite – Korean Restaurant</title>
+  <link rel="stylesheet" href="style.css" />
 </head>
 <body>
-    <header>
-        <h1>Welcome to Koreyaki</h1>
-        <p>Authentic Korean Cuisine in a Cozy Atmosphere</p>
-    </header>
-    <nav>
-        <a href="#about">About Us</a>
-        <a href="#menu">Menu</a>
-        <a href="#location">Location</a>
-        <a href="#contact">Contact</a>
-    </nav>
-    <section id="task-dashboard" class="container">
-    <h2>Task Management Dashboard</h2>
-    <div id="task-form">
-        <input type="text" id="task-input" placeholder="Enter a new task" />
-        <button id="add-task">Add Task</button>
+  <header>
+    <h1>SeoulBite – Korean Dining Experience</h1>
+    <div class="auth-buttons">
+      <button onclick="alert('Login Coming Soon')">Login</button>
+      <button onclick="alert('Signup Coming Soon')">Sign Up</button>
     </div>
-    <ul id="task-list"></ul>
-</section>
-<section id="kanban-board" class="container">
-    <h2>Task Management Kanban Board</h2>
-    <div id="task-form">
-        <input type="text" id="task-name" placeholder="Enter task name" />
-        <input type="text" id="assignee" placeholder="Assign to (e.g., John)" />
-        <button id="add-task">Add Task</button>
-    </div>
-    <div class="board">
-        <div class="column" id="todo-column">
-            <h3>To Do</h3>
-            <ul class="task-list" id="todo-list"></ul>
-        </div>
-        <div class="column" id="in-progress-column">
-            <h3>In Progress</h3>
-            <ul class="task-list" id="in-progress-list"></ul>
-        </div>
-        <div class="column" id="done-column">
-            <h3>Done</h3>
-            <ul class="task-list" id="done-list"></ul>
-        </div>
-    </div>
-</section>
+  </header>
 
-<script>
-    document.addEventListener("DOMContentLoaded", function () {
-        const taskNameInput = document.getElementById("task-name");
-        const assigneeInput = document.getElementById("assignee");
-        const addTaskButton = document.getElementById("add-task");
+  <nav>
+    <a href="#menu">Menu</a>
+    <a href="#reservation">Reserve Table</a>
+    <a href="#about">About Us</a>
+  </nav>
 
-        function createTaskElement(name, assignee) {
-            const taskItem = document.createElement("li");
-            taskItem.classList.add("task-item");
-            taskItem.draggable = true;
-            taskItem.innerHTML = `
-                <p><strong>${name}</strong></p>
-                <p>Assigned to: ${assignee}</p>
-            `;
-            taskItem.addEventListener("dragstart", (e) => {
-                e.dataTransfer.setData("text", taskItem.outerHTML);
-                taskItem.classList.add("dragging");
-            });
-            taskItem.addEventListener("dragend", () => {
-                taskItem.classList.remove("dragging");
-            });
-            return taskItem;
-        }
+  <section id="menu">
+    <h2>Top Korean Dishes</h2>
+    <ul>
+      <li>Bibimbap – ₹350</li>
+      <li>Tteokbokki – ₹250</li>
+      <li>Kimchi Ramen – ₹300</li>
+      <li>Bulgogi Wraps – ₹400</li>
+    </ul>
+  </section>
 
-        addTaskButton.addEventListener("click", function () {
-            const taskName = taskNameInput.value.trim();
-            const assignee = assigneeInput.value.trim();
-            if (!taskName || !assignee) {
-                alert("Both task name and assignee are required.");
-                return;
-            }
-            const taskElement = createTaskElement(taskName, assignee);
-            document.getElementById("todo-list").appendChild(taskElement);
-            taskNameInput.value = "";
-            assigneeInput.value = "";
-        });
+  <!-- 💡 Reservation Section -->
+  <section id="reservation">
+    <h2>Reserve a Table at SeoulBite</h2>
+    <form id="reservationForm">
+      <input type="text" name="name" placeholder="Your Name" required />
+      <input type="email" name="email" placeholder="Email" required />
+      <input type="text" name="date" placeholder="Reservation Date" required />
+      <button type="submit">Reserve</button>
+    </form>
+    <p id="responseMsg" style="color: green;"></p>
+  </section>
 
-        document.querySelectorAll(".task-list").forEach((list) => {
-            list.addEventListener("dragover", (e) => {
-                e.preventDefault();
-            });
-            list.addEventListener("drop", (e) => {
-                e.preventDefault();
-                const taskHTML = e.dataTransfer.getData("text");
-                list.innerHTML += taskHTML;
-            });
-        });
-    });
-</script>
+  <section id="about">
+    <h2>About SeoulBite</h2>
+    <p>
+      Experience authentic Korean cuisine with a modern twist. We serve traditional dishes,
+      fusion plates, and healthy options curated by top chefs from Seoul.
+    </p>
+  </section>
 
+  <footer>
+    <p>© 2025 SeoulBite Restaurant. All Rights Reserved.</p>
+  </footer>
 
-    <div class="container">
-        <section id="about">
-            <h2>About Us</h2>
-            <p>Welcome to Koreyaki, where the heart of Korea meets the soul of authentic flavors. Our story is one of passion, heritage, and a deep love for Korean cuisine. From the bustling markets of Seoul to the serene countryside, we’ve brought the vibrant tastes and warm hospitality of Korea right to your table.
-
-                At Koreyaki, we believe that food is more than just sustenance; it’s an experience. Our talented chefs, with years of culinary expertise, craft every dish with the finest ingredients, blending traditional recipes with modern twists to create unforgettable dining moments. Whether you’re savoring a bowl of steaming Bibimbap or indulging in our signature Kimchi Jjigae, each bite tells a story of passion and authenticity.
-                
-                Join us on a journey through the rich flavors and timeless traditions of Korea. We invite you to experience the warmth of Korean hospitality and the magic of our cuisine. Come for the food, stay for the unforgettable experience</p>
-        </section>
-        <script>
-    // JavaS>cript for Task Management Dashboard
-    document.addEventListener("DOMContentLoaded", function () {
-        const taskInput = document.getElementById("task-input");
-        const taskList = document.getElementById("task-list");
-        const addTaskButton = document.getElementById("add-task");
-
-        // Add new task
-        addTaskButton.addEventListener("click", function () {
-            const taskText = taskInput.value.trim();
-            if (taskText === "") {
-                alert("Task cannot be empty!");
-                return;
-            }
-
-            const listItem = document.createElement("li");
-            listItem.textContent = taskText;
-
-            // Add remove button to task
-            const removeButton = document.createElement("button");
-            removeButton.textContent = "Remove";
-            removeButton.style.marginLeft = "10px";
-            removeButton.addEventListener("click", function () {
-                taskList.removeChild(listItem);
-            });
-
-            listItem.appendChild(removeButton);
-            taskList.appendChild(listItem);
-            taskInput.value = ""; // Clear input
-        });
-    });
-        </script>
-        
-        <section id="menu">
-            <h2>Our Menu</h2>
-            <div class="menu">
-                <div class="menu-item">
-                    <img src="images.jpeg" alt="Bulgogi">
-                    <h3>Bulgogi</h3>
-                    <p>Sweet and savory grilled beef marinated in our special sauce.</p>
-                </div>
-                <div class="menu-item">
-                    <img src="vegan-kimchi-noodles-korean-inspired-bibim-guksu-thumb.jpg" alt="Kimchi">
-                    <h3>Kimchi</h3>
-                    <p>Our house-made spicy fermented cabbage.</p>
-                </div>
-                <div class="menu-item">
-                    <img src="download (2).jpeg" alt="Bibimbap">
-                    <h3>Bibimbap</h3>
-                    <p>A colorful rice bowl topped with veggies and egg.</p>
-                </div>
-                <div class="menu-item">
-                    <img src="download.jpeg" alt="boba tea">
-                    <h3>Boba Tea</h3>
-                    <p>Bubble tea most commonly consists of tea accompanied by chewy tapioca balls</p>
-                </div>
-                <div class="menu-item">
-                    <img src="download (1).jpeg" alt="Corn dog">
-                    <h3>Corn Dog</h3>
-                    <p>A corn dog is a wiener on a stick that has been coated in a thick layer of cornmeal batter and deep frie</p>
-                </div>
-                <div class="menu-item">
-                    <img src="images (1).jpeg" alt="Korean fried chicken">
-                    <h3>Korean Fired chicken</h3>
-                    <p>Korean cuisine is largely based on rice, vegetables, seafood and (at least in South Korea) meats.</p>
-                </div>
-            </div>
-        </section>
-        <section id="location" class="location">
-            <h2>Our Location</h2>
-            <p>407/1, 5th Main Rd, HBR Layout 2nd Block, HRBR Layout, Kalyan Nagar, Bengaluru, Karnataka 56004</p>
-            <p><a href="https://www.google.com/maps/dir//407%2F1,+5th+Main+Rd,+HBR+Layout+2nd+Block,+HRBR+Layout,+Kalyan+Nagar,+Bengaluru,+Karnataka+560043/@13.0225472,77.5571014,12z/data=!4m8!4m7!1m0!1m5!1m1!1s0x3bae171af2a00de3:0x86ab6a8caca9d4c3!2m2!1d77.6395033!2d13.0225602?entry=ttu&g_ep=EgoyMDI0MTIwNC4wIKXMDSoASAFQAw%3D%3D" target="_blank">View on Google Maps</a></p>
-        </section>
-        <section id="contact" class="contact">
-            <h2>Contact Us</h2>
-            <p>Phone: +91 979794619</p>
-            <p>Email: vik@koreyaki.com</p>
-        </section>
-    </div>
-    <section id="team-discussions" class="container">
-        <h2>Live Chat for Team Discussions</h2>
-        <div id="chat-box">
-            <div id="chat-messages"></div>
-            <div id="chat-input">
-                <input type="text" id="message-input" placeholder="Type a message..." />
-                <button id="send-message">Send</button>
-            </div>
-        </div>
-    </section>
-    
-    <section id="notifications" class="container">
-        <h2>Notifications</h2>
-        <div id="notification-list"></div>
-    </section>
-    
-    <section id="sprint-planning" class="container">
-        <h2>Reservations</h2>
-        <div id="sprint-form">
-            <input type="text" id="sprint-task" placeholder="Task name" />
-            <input type="date" id="sprint-deadline" />
-            <button id="add-sprint-task">Add Reservations</button>
-        </div>
-        <ul id="sprint-task-list"></ul>
-    </section><section id="feedback-form" class="container">
-        <h2> Feedback Form</h2>
-        <form id="feedback-form-element">
-            <input type="text" id="team-member-name" placeholder="Your Name" required />
-            <input type="text" id="sprint-details" placeholder="Sprint Name/Details" required />
-            <textarea id="feedback-comments" placeholder="Share your feedback or insights..." rows="5" required></textarea>
-            <button type="submit">Submit Feedback</button>
-        </form>
-        <div id="feedback-section">
-            <h3>Team Feedback</h3>
-            <ul id="feedback-list"></ul>
-        </div>
-    </section>
-    
-    
-    <footer>
-        <p>&copy; 2024 Koreyaki All Rights Reserved.</p>
-    </footer>
-    
+  <script src="script.js"></script>
 </body>
 </html>

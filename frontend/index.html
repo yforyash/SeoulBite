@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>SeoulBite – Korean Restaurant</title>
+  <link rel="stylesheet" href="style.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Jua&family=Roboto&display=swap" rel="stylesheet">
+</head>
+<body>
+
+  <header>
+    <div class="overlay">
+      <h1>SeoulBite</h1>
+      <p>맛있는 한입의 여정 — “A Journey in Every Bite”</p>
+      <a href="#menu" class="btn">Explore Menu</a>
+    </div>
+  </header>
+
+  <section id="about">
+    <h2>About Us</h2>
+    <p>
+      Welcome to <strong>SeoulBite</strong> – where Korean traditions meet modern flavor.
+      From sizzling Bibimbap to soulful Kimchi stew, our dishes are a reflection of Korean heart & soul.
+    </p>
+    <div class="about-images">
+      <img src="assets/korean-chef.jpg" alt="Chef">
+      <img src="assets/customers.jpg" alt="Happy customers">
+    </div>
+  </section>
+
+  <section id="menu">
+    <h2>Popular Dishes</h2>
+    <div class="menu-grid">
+      <div class="card">
+        <img src="assets/bibimbap.jpg" alt="Bibimbap">
+        <h3>Bibimbap</h3>
+        <p>Mixed rice bowl with veggies, meat, and egg.</p>
+      </div>
+      <div class="card">
+        <img src="assets/samgyeopsal.jpg" alt="Samgyeopsal">
+        <h3>Samgyeopsal</h3>
+        <p>Grilled pork belly served with dipping sauces.</p>
+      </div>
+      <div class="card">
+        <img src="assets/kimchi.jpg" alt="Kimchi Stew">
+        <h3>Kimchi Stew</h3>
+        <p>Spicy and comforting – perfect with steamed rice.</p>
+      </div>
+    </div>
+  </section>
+
+  <section id="reservation">
+    <h2>Make a Reservation</h2>
+    <form id="reservationForm">
+      <input type="text" name="name" placeholder="Your Name" required />
+      <input type="email" name="email" placeholder="Email Address" required />
+      <input type="date" name="date" required />
+      <button type="submit">Reserve Table</button>
+    </form>
+    <p id="responseMsg"></p>
+  </section>
+
+  <footer>
+    <p>© 2025 SeoulBite – 맛있는 여정. All rights reserved.</p>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>
